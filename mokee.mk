@@ -1,13 +1,13 @@
 $(call inherit-product, device/motorola/quark/full_quark.mk)
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+# Inherit some common MK stuff.
+$(call inherit-product, vendor/mk/config/common_full_phone.mk)
 
 # Enhanced NFC
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
+$(call inherit-product, vendor/mk/config/nfc_enhanced.mk)
 
 PRODUCT_RELEASE_NAME := Moto MAXX
-PRODUCT_NAME := cm_quark
+PRODUCT_NAME := mk_quark
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=quark \

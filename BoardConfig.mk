@@ -76,8 +76,8 @@ BOARD_HAS_QCA_BT_ROME := true
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 
-# CMHW
-BOARD_HARDWARE_CLASS += device/motorola/quark/cmhw
+# MKHW
+BOARD_HARDWARE_CLASS += device/motorola/quark/mkhw
 
 # Display
 BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
