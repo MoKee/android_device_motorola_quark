@@ -103,7 +103,8 @@ PRODUCT_PACKAGES += \
     charger_res_images
 
 # CMActions
- PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
+    libjni_CMActions \
     CMActions
 
 # CRDA
@@ -209,10 +210,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     qcmediaplayer
 
-# QRNGD
-PRODUCT_PACKAGES += \
-    qrngd
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.qcom.bt.sh \
@@ -249,7 +246,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd \
-    libQWiFiSoftApCfg \
     wpa_supplicant \
     wpa_supplicant.conf
 
