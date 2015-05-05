@@ -69,6 +69,7 @@ AUDIO_FEATURE_ENABLED_EXTERNAL_SPEAKER := true
 AUDIO_FEATURE_ENABLED_FLUENCE := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_USBAUDIO := true
+AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 BOARD_USES_ALSA_AUDIO := true
 
 # Bluetooth
@@ -135,6 +136,7 @@ BOARD_SEPOLICY_UNION += \
     mediaserver.te \
     mm-qcamerad.te \
     mpdecision.te \
+    netd.te \
     property.te \
     property_contexts \
     rild.te \

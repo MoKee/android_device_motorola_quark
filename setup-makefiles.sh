@@ -75,7 +75,21 @@ PRODUCT_PACKAGES += \\
     libtime_genoff
 
 PRODUCT_PACKAGES += \\
+    TriggerEnroll \\
+    TriggerTrainingService
+
+PRODUCT_PACKAGES += \\
     org.simalliance.openmobileapi
+
+PRODUCT_PACKAGES += \\
+    qcrilmsgtunnel \\
+    qcnvitems \\
+    qcrilhook
+
+PRODUCT_PACKAGES += \\
+    atfwd \\
+    rcsimssettings \\
+    rcsservice
 
 \$(call inherit-product, vendor/$VENDOR/$DEVICE/$DEVICE-vendor-blobs.mk)
 EOF
@@ -160,10 +174,32 @@ LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
 
 include \$(CLEAR_VARS)
+LOCAL_MODULE := TriggerEnroll
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_SRC_FILES := proprietary/priv-app/\$(LOCAL_MODULE)/\$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_CLASS := APPS
+LOCAL_PRIVILEGED_MODULE := true
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := TriggerTrainingService
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_SRC_FILES := proprietary/priv-app/\$(LOCAL_MODULE)/\$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_CLASS := APPS
+LOCAL_PRIVILEGED_MODULE := true
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
 LOCAL_MODULE := libtime_genoff
 LOCAL_MODULE_OWNER := $VENDOR
 LOCAL_MODULE_PATH := \$(TARGET_OUT)/vendor/lib
-LOCAL_SRC_FILES := proprietary/vendor/lib/libtime_genoff.so
+LOCAL_SRC_FILES := proprietary/vendor/lib/\$(LOCAL_MODULE).so
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_SUFFIX := .so
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
@@ -173,7 +209,63 @@ include \$(CLEAR_VARS)
 LOCAL_MODULE := org.simalliance.openmobileapi
 LOCAL_MODULE_OWNER := $VENDOR
 LOCAL_MODULE_TAGS := optional
-LOCAL_SRC_FILES := proprietary/framework/org.simalliance.openmobileapi.jar
+LOCAL_SRC_FILES := proprietary/framework/\$(LOCAL_MODULE).jar
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE_SUFFIX := \$(COMMON_JAVA_PACKAGE_SUFFIX)
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := qcrilmsgtunnel
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_SRC_FILES := proprietary/app/\$(LOCAL_MODULE)/\$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := qcnvitems
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := proprietary/framework/\$(LOCAL_MODULE).jar
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE_SUFFIX := \$(COMMON_JAVA_PACKAGE_SUFFIX)
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := qcrilhook
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := proprietary/framework/\$(LOCAL_MODULE).jar
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE_SUFFIX := \$(COMMON_JAVA_PACKAGE_SUFFIX)
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := atfwd
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_SRC_FILES := proprietary/app/\$(LOCAL_MODULE)/\$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := rcsimssettings
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := proprietary/framework/\$(LOCAL_MODULE).jar
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE_SUFFIX := \$(COMMON_JAVA_PACKAGE_SUFFIX)
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := rcsservice
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := proprietary/framework/\$(LOCAL_MODULE).jar
 LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_MODULE_SUFFIX := \$(COMMON_JAVA_PACKAGE_SUFFIX)
 include \$(BUILD_PREBUILT)

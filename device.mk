@@ -24,12 +24,16 @@ LOCAL_PATH := device/motorola/quark
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Screen density
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi 560dpi xxxhdpi
+PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
+PRODUCT_AAPT_PREBUILT_DPI := 560dpi xxhdpi xhdpi hdpi
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
+
+# No SDCard
+PRODUCT_CHARACTERISTICS := nosdcard
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -258,6 +262,8 @@ PRODUCT_PACKAGES += \
     wlan_mac_serial.bin
 
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(LOCAL_PATH)/configs/hostapd.deny:system/etc/hostapd/hostapd.deny \
     $(LOCAL_PATH)/configs/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
 
 PRODUCT_COPY_FILES += \
