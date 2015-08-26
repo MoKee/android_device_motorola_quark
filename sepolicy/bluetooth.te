@@ -1,3 +1,1 @@
-allow bluetooth self:capability { dac_override setgid setuid };
-allow bluetooth proc_sysrq:file { open read write };
-allow bluetooth sysfs_msmuart_file:file { open read write };
+allow bluetooth wcnss_filter:unix_stream_socket connectto;
