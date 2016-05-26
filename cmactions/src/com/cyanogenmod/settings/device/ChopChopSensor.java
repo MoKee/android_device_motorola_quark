@@ -16,58 +16,59 @@
 
 package com.cyanogenmod.settings.device;
 
+import java.util.List;
+
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.util.Log;
 
-public class StowSensor implements ScreenStateNotifier, SensorEventListener {
-    private static final String TAG = "CMActions-StowSensor";
+public class ChopChopSensor implements SensorEventListener, UpdatedStateNotifier {
+    private static final String TAG = "CMActions-ChopChopSensor";
+    private static final int DELAY_BETWEEN_CHOP_CHOP_IN_MS = 1500;
 
     private final CMActionsSettings mCMActionsSettings;
+    private final SensorAction mAction;
     private final SensorHelper mSensorHelper;
-    private final SensorAction mSensorAction;
     private final Sensor mSensor;
+    private long mLastAction;
 
-    private boolean mEnabled;
-    private boolean mLastStowed;
+    private boolean mIsEnabled;
 
-    public StowSensor(CMActionsSettings cmActionsSettings, SensorHelper sensorHelper,
-                SensorAction action) {
+    public ChopChopSensor(CMActionsSettings cmActionsSettings, SensorAction action,
+        SensorHelper sensorHelper) {
         mCMActionsSettings = cmActionsSettings;
+        mAction = action;
         mSensorHelper = sensorHelper;
-        mSensorAction = action;
-
-        mSensor = sensorHelper.getStowSensor();
+        mSensor = sensorHelper.getChopChopSensor();
+        mLastAction = System.currentTimeMillis();
     }
 
     @Override
-    public void screenTurnedOn() {
-        if (mEnabled) {
-            Log.d(TAG, "Disabling");
-            mSensorHelper.unregisterListener(this);
-            mEnabled = false;
-        }
-    }
-
-    @Override
-    public void screenTurnedOff() {
-        if (mCMActionsSettings.isPickUpEnabled() && !mEnabled) {
+    public synchronized void updateState() {
+        if (mCMActionsSettings.isChopChopGestureEnabled() && !mIsEnabled) {
             Log.d(TAG, "Enabling");
             mSensorHelper.registerListener(mSensor, this);
-            mEnabled = true;
+            mIsEnabled = true;
+        } else if (! mCMActionsSettings.isChopChopGestureEnabled() && mIsEnabled) {
+            Log.d(TAG, "Disabling");
+            mSensorHelper.unregisterListener(this);
+            mIsEnabled = false;
         }
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        boolean thisStowed = (event.values[0] != 0);
-        Log.d(TAG, "event: " + thisStowed);
-        DozePulseAction.setCanDoze(!thisStowed);
-        if (mLastStowed && ! thisStowed) {
-            mSensorAction.action();
+
+        long now = System.currentTimeMillis();
+        if (now - mLastAction > DELAY_BETWEEN_CHOP_CHOP_IN_MS) {
+            Log.d(TAG, "Allowing chop chop");
+            mLastAction = now;
+            mAction.action();
+        } else {
+            Log.d(TAG, "Denying chop chop");
         }
-        mLastStowed = thisStowed;
     }
 
     @Override
