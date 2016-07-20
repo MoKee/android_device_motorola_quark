@@ -35,6 +35,7 @@
 #include "util.h"
 
 #define ARRAY_SIZE(x) (sizeof(x)/sizeof(x[0]))
+#define ISMATCH(a,b)    (!strncmp(a,b,PROP_VALUE_MAX))
 
 static void set_cmdline_properties()
 {
@@ -70,10 +71,6 @@ void vendor_load_properties()
     char fsgid[PROP_VALUE_MAX];
     const char *fsgid_value;
     int rc;
-
-    UNUSED(msm_id);
-    UNUSED(msm_ver);
-    UNUSED(board_type);
 
     rc = property_get("ro.board.platform", platform);
     if (!rc || !ISMATCH(platform, ANDROID_TARGET))
