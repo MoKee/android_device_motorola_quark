@@ -17,11 +17,7 @@
 
 package org.mokee.hardware;
 
-import org.mokee.hardware.util.FileUtils;
-
-import android.os.SystemProperties;
-
-import java.io.File;
+import org.mokee.internal.util.FileUtils;
 
 public class SunlightEnhancement {
 
@@ -33,8 +29,7 @@ public class SunlightEnhancement {
      * @return boolean Supported devices must return always true
      */
     public static boolean isSupported() {
-        File f = new File(FILE_HBM);
-        return f.exists();
+        return FileUtils.isFileWritable(FILE_HBM);
     }
 
     /**

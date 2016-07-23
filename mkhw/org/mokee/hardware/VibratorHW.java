@@ -17,14 +17,13 @@
 
 package org.mokee.hardware;
 
-import org.mokee.hardware.util.FileUtils;
-import java.io.File;
+import org.mokee.internal.util.FileUtils;
 
 public class VibratorHW {
     private static String LEVEL_PATH = "/sys/vibrator/pwmvalue";
 
     public static boolean isSupported() {
-        return new File(LEVEL_PATH).exists();
+        return FileUtils.isFileWritable(LEVEL_PATH);
     }
 
     public static int getMaxIntensity()  {
